@@ -291,9 +291,9 @@
   <genericsetup:registerProfile
     zcml:condition="have plone-5"
     name="default"
-    title="Plone Widgets"
+    title="Plone Patternslib Widgets"
     directory="profiles/p5"
-    description="Better widgets for Plone"
+    description="Patternslib based widgets for Plone"
     provides="Products.GenericSetup.interfaces.EXTENSION"
     for="Products.CMFPlone.interfaces.IPloneSiteRoot"
     />
@@ -309,7 +309,7 @@
 
   <genericsetup:registerProfile
     name="uninstall"
-    title="Plone Widgets Uninstall"
+    title="Plone Patternslib Widgets Uninstall"
     directory="profiles/uninstall"
     description="Removes Plone Widgets."
     provides="Products.GenericSetup.interfaces.EXTENSION"

@@ -11,6 +11,7 @@
     for="*"
     class=".vocabulary.VocabularyView"
     permission="zope2.View"
+    layer="collective.patterns.widgets.interfaces.IWidgetsLayer"
     />
 
   <browser:page
@@ -18,6 +19,7 @@
     for="z3c.form.interfaces.IWidget"
     class=".vocabulary.SourceView"
     permission="zope.Public"
+    layer="collective.patterns.widgets.interfaces.IWidgetsLayer"
     />
 
   <browser:page
@@ -25,6 +27,7 @@
     for="Products.CMFCore.interfaces._content.IFolderish"
     class=".file.FileUploadView"
     permission="cmf.AddPortalContent"
+    layer="collective.patterns.widgets.interfaces.IWidgetsLayer"
     />
 
   <browser:page
@@ -32,6 +35,7 @@
     for="Products.CMFPlone.interfaces.IPloneSiteRoot"
     class=".query.QueryStringIndexOptions"
     permission="zope2.View"
+    layer="collective.patterns.widgets.interfaces.IWidgetsLayer"
     />
 
   <browser:page
@@ -41,6 +45,7 @@
     class=".at_widget.PatternsWidgetMacros"
     template="patterns_widget.pt"
     permission="zope.Public"
+    layer="collective.patterns.widgets.interfaces.IWidgetsLayer"
     />
 
   <browser:view

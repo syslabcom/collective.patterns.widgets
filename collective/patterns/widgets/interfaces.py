@@ -1,9 +1,13 @@
 from zope.interface import Interface
-from plone.app.z3cform.interfaces import IPloneFormLayer
+try:
+    from plone.app.widgets.interfaces import IWidgetsLayer
+    IFormLayer = IWidgetsLayer
+except ImportError:
+    from plone.app.z3cform.interfaces import IPloneFormLayer as IFormLayer
 from zope.filerepresentation.interfaces import IFileFactory
 
 
-class IWidgetsLayer(IPloneFormLayer):
+class IWidgetsLayer(IFormLayer):
     """Browser layer used to indicate that collective.patterns.widgets is
     installed
     """

@@ -11,7 +11,7 @@ except pkg_resources.DistributionNotFound:
 else:
     from plone.dexterity.interfaces import IDexterityFTI
     HAS_DEXTERITY = True
-from plone.app.widgets.interfaces import IATCTFileFactory, IDXFileFactory
+from collective.patterns.widgets.interfaces import IATCTFileFactory, IDXFileFactory
 from plone.uuid.interfaces import IUUID
 import os
 import logging

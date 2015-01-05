@@ -8,10 +8,10 @@ except ImportError:  # pragma: nocover
 
 
 class BaseWidgetTests(unittest.TestCase):
-    """Tests for plone.app.widgets.base.BaseWidget."""
+    """Tests for collective.patterns.widgets.base.BaseWidget."""
 
     def test_defaults(self):
-        from plone.app.widgets.base import BaseWidget
+        from collective.patterns.widgets.base import BaseWidget
 
         widget = BaseWidget('input', 'example1')
         self.assertEqual(
@@ -21,7 +21,7 @@ class BaseWidgetTests(unittest.TestCase):
         self.assertEqual(widget.klass, 'pat-example1')
 
     def test_different_element_tag(self):
-        from plone.app.widgets.base import BaseWidget
+        from collective.patterns.widgets.base import BaseWidget
 
         widget = BaseWidget('select', 'example1')
         self.assertEqual(
@@ -31,7 +31,7 @@ class BaseWidgetTests(unittest.TestCase):
         self.assertEqual(widget.klass, 'pat-example1')
 
     def test_setting_patterns_options(self):
-        from plone.app.widgets.base import BaseWidget
+        from collective.patterns.widgets.base import BaseWidget
 
         widget = BaseWidget(
             'input',
@@ -49,10 +49,10 @@ class BaseWidgetTests(unittest.TestCase):
 
 
 class InputWidgetTests(unittest.TestCase):
-    """Tests for plone.app.widgets.base.InputWidget."""
+    """Tests for collective.patterns.widgets.base.InputWidget."""
 
     def test_defaults(self):
-        from plone.app.widgets.base import InputWidget
+        from collective.patterns.widgets.base import InputWidget
 
         widget = InputWidget('example1', name='example2')
 
@@ -64,7 +64,7 @@ class InputWidgetTests(unittest.TestCase):
         self.assertEqual(widget.value, None)
 
     def test_set_type_and_value(self):
-        from plone.app.widgets.base import InputWidget
+        from collective.patterns.widgets.base import InputWidget
 
         widget = InputWidget(
             'example1',
@@ -102,10 +102,10 @@ class InputWidgetTests(unittest.TestCase):
 
 
 class SelectWidgetTests(unittest.TestCase):
-    """Tests for plone.app.widgets.base.SelectWidget."""
+    """Tests for collective.patterns.widgets.base.SelectWidget."""
 
     def test_defaults(self):
-        from plone.app.widgets.base import SelectWidget
+        from collective.patterns.widgets.base import SelectWidget
 
         widget = SelectWidget('example1', name='example2')
 
@@ -116,7 +116,7 @@ class SelectWidgetTests(unittest.TestCase):
         self.assertEqual(widget.value, [])
 
     def test_set_items_and_value(self):
-        from plone.app.widgets.base import SelectWidget
+        from collective.patterns.widgets.base import SelectWidget
 
         items = [
             ('token1', 'value1'),
@@ -168,7 +168,7 @@ class SelectWidgetTests(unittest.TestCase):
             '<select class="pat-example1" name="example2"></select>')
 
     def test_multiple(self):
-        from plone.app.widgets.base import SelectWidget
+        from collective.patterns.widgets.base import SelectWidget
 
         items = [
             ('token1', 'value1'),
@@ -223,10 +223,10 @@ class SelectWidgetTests(unittest.TestCase):
 
 
 class TextareaWidgetTests(unittest.TestCase):
-    """Tests for plone.app.widgets.base.TextareaWidget."""
+    """Tests for collective.patterns.widgets.base.TextareaWidget."""
 
     def test_defaults(self):
-        from plone.app.widgets.base import TextareaWidget
+        from collective.patterns.widgets.base import TextareaWidget
 
         widget = TextareaWidget('example1', name="example2")
         self.assertEqual(
@@ -238,7 +238,7 @@ class TextareaWidgetTests(unittest.TestCase):
         self.assertEqual(widget.value, '')
 
     def test_setting_patterns_options(self):
-        from plone.app.widgets.base import TextareaWidget
+        from collective.patterns.widgets.base import TextareaWidget
 
         widget = TextareaWidget(
             'example1',
@@ -257,7 +257,7 @@ class TextareaWidgetTests(unittest.TestCase):
             '</textarea>')
 
     def test_set_value(self):
-        from plone.app.widgets.base import TextareaWidget
+        from collective.patterns.widgets.base import TextareaWidget
 
         widget = TextareaWidget('example1', name="example2", value='example3')
         self.assertEqual(
@@ -281,7 +281,7 @@ class TextareaWidgetTests(unittest.TestCase):
             '<textarea class="pat-example1" name="example2"></textarea>')
 
     def test_can_not_change_element_tag(self):
-        from plone.app.widgets.base import TextareaWidget
+        from collective.patterns.widgets.base import TextareaWidget
         self.assertRaises(
             TypeError,
             TextareaWidget, 'example1', el='input', name='example2')

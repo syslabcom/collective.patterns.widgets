@@ -13,9 +13,9 @@ from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
 from plone.app.testing import login
 from plone.app.testing import setRoles
-from plone.app.widgets.browser.vocabulary import VocabularyView
-from plone.app.widgets.testing import PLONEAPPWIDGETS_INTEGRATION_TESTING
-from plone.app.widgets.testing import TestRequest
+from collective.patterns.widgets.browser.vocabulary import VocabularyView
+from collective.patterns.widgets.testing import PLONEAPPWIDGETS_INTEGRATION_TESTING
+from collective.patterns.widgets.testing import TestRequest
 from plone.testing.zca import ZCML_DIRECTIVES
 from zope.configuration import xmlconfig
 from zope.globalrequest import setRequest
@@ -35,8 +35,8 @@ import plone.uuid
 class BaseWidgetTests(unittest.TestCase):
 
     def test_widget_pattern_notimplemented(self):
-        from plone.app.widgets.at import BaseWidget
-        from plone.app.widgets.utils import NotImplemented
+        from collective.patterns.widgets.at import BaseWidget
+        from collective.patterns.widgets.utils import NotImplemented
 
         widget = BaseWidget()
 
@@ -53,9 +53,9 @@ class BaseWidgetTests(unittest.TestCase):
             widget._base_args(None, None, None))
 
     def test_widget_base_notimplemented(self):
-        from plone.app.widgets.at import BaseWidget
-        from plone.app.widgets.base import InputWidget
-        from plone.app.widgets.utils import NotImplemented
+        from collective.patterns.widgets.at import BaseWidget
+        from collective.patterns.widgets.base import InputWidget
+        from collective.patterns.widgets.utils import NotImplemented
 
         widget = BaseWidget(pattern='example')
 
@@ -72,7 +72,7 @@ class BaseWidgetTests(unittest.TestCase):
 class DateWidgetTests(unittest.TestCase):
 
     def setUp(self):
-        from plone.app.widgets.at import DateWidget
+        from collective.patterns.widgets.at import DateWidget
         self.request = TestRequest(environ={'HTTP_ACCEPT_LANGUAGE': 'en'})
         self.context = Mock()
         self.field = Mock()
@@ -130,7 +130,7 @@ class DateWidgetTests(unittest.TestCase):
 class DatetimeWidgetTests(unittest.TestCase):
 
     def setUp(self):
-        from plone.app.widgets.at import DatetimeWidget
+        from collective.patterns.widgets.at import DatetimeWidget
         self.request = TestRequest(environ={'HTTP_ACCEPT_LANGUAGE': 'en'})
         self.context = Mock()
         self.field = Mock()
@@ -208,7 +208,7 @@ class SelectWidgetTests(unittest.TestCase):
         self.field.Vocabulary.return_value = self.vocabulary
 
     def test_widget(self):
-        from plone.app.widgets.at import SelectWidget
+        from collective.patterns.widgets.at import SelectWidget
         widget = SelectWidget()
         self.assertEqual(
             {
@@ -261,7 +261,7 @@ class SelectWidgetTests(unittest.TestCase):
         )
 
     def test_widget_orderable(self):
-        from plone.app.widgets.at import SelectWidget
+        from collective.patterns.widgets.at import SelectWidget
         widget = SelectWidget()
         widget.multiple = True
         widget.orderable = True
@@ -282,7 +282,7 @@ class SelectWidgetTests(unittest.TestCase):
         )
 
     def test_process_form(self):
-        from plone.app.widgets.at import SelectWidget
+        from collective.patterns.widgets.at import SelectWidget
         widget = SelectWidget()
         form = {'fieldname': 'aaa.bbb.ccc'}
         self.assertEquals('aaa.bbb.ccc',
@@ -317,7 +317,7 @@ class RelatedItemsWidgetTests(unittest.TestCase):
         from zope.lifecycleevent import ObjectCreatedEvent
         from plone.uuid.interfaces import IUUID
         from plone.uuid.interfaces import IAttributeUUID
-        from plone.app.widgets.at import RelatedItemsWidget
+        from collective.patterns.widgets.at import RelatedItemsWidget
 
         class ExampleContent(object):
             implements(IAttributeUUID)
@@ -362,7 +362,7 @@ class RelatedItemsWidgetTests(unittest.TestCase):
         from zope.lifecycleevent import ObjectCreatedEvent
         from plone.uuid.interfaces import IUUID
         from plone.uuid.interfaces import IAttributeUUID
-        from plone.app.widgets.at import RelatedItemsWidget
+        from collective.patterns.widgets.at import RelatedItemsWidget
 
         class ExampleContent(object):
             implements(IAttributeUUID)
@@ -400,7 +400,7 @@ class RelatedItemsWidgetTests(unittest.TestCase):
         )
 
     def test_single_valued_empty(self):
-        from plone.app.widgets.at import RelatedItemsWidget
+        from collective.patterns.widgets.at import RelatedItemsWidget
 
         self.field.getName.return_value = 'fieldname'
         self.field.getAccessor.return_value = lambda: None
@@ -433,7 +433,7 @@ class RelatedItemsWidgetTests(unittest.TestCase):
 
     def test_multiple_widgets(self):
         from zope.event import notify
-        from plone.app.widgets.at import RelatedItemsWidget
+        from collective.patterns.widgets.at import RelatedItemsWidget
         from zope.interface import implements
         from zope.lifecycleevent import ObjectCreatedEvent
         from plone.uuid.interfaces import IUUID
@@ -520,7 +520,7 @@ class QueryStringWidgetTests(unittest.TestCase):
         self.field = Mock()
 
     def test_widget(self):
-        from plone.app.widgets.at import QueryStringWidget
+        from collective.patterns.widgets.at import QueryStringWidget
 
         self.field.getName.return_value = 'fieldname'
         self.field.getRaw.return_value = [
@@ -563,7 +563,7 @@ class TinyMCEWidgetTests(unittest.TestCase):
         utility = getToolByName(self.portal, 'portal_tinymce', None)
         if not utility:
             return
-        from plone.app.widgets.at import TinyMCEWidget
+        from collective.patterns.widgets.at import TinyMCEWidget
         widget = TinyMCEWidget()
         self.field.widget = widget
         base_args = widget._base_args(self.portal, self.field, self.request)
@@ -581,7 +581,7 @@ class TinyMCEWidgetTests(unittest.TestCase):
         """A RichTextWidget with only one available mimetype should render the
         pattern class directly on itself.
         """
-        from plone.app.widgets.at import TinyMCEWidget
+        from collective.patterns.widgets.at import TinyMCEWidget
         widget = TinyMCEWidget()
         rendered = widget.edit(self.portal, self.field, self.request)
 
@@ -600,7 +600,7 @@ class TinyMCEWidgetTests(unittest.TestCase):
         mimetype selection widget along with the textfield. When there is no
         field value, the default mimetype should be preselected.
         """
-        from plone.app.widgets.at import TinyMCEWidget
+        from collective.patterns.widgets.at import TinyMCEWidget
         widget = TinyMCEWidget()
         rendered = widget.edit(self.portal, self.field, self.request)
 
@@ -617,7 +617,7 @@ class ArchetypesVocabularyPermissionTests(unittest.TestCase):
     layer = PLONEAPPWIDGETS_INTEGRATION_TESTING
 
     def setUp(self):
-        from plone.app.widgets.at import AjaxSelectWidget
+        from collective.patterns.widgets.at import AjaxSelectWidget
         self.request = TestRequest(environ={'HTTP_ACCEPT_LANGUAGE': 'en'})
         setRequest(self.request)
         self.portal = self.layer['portal']

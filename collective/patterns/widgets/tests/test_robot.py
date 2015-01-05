@@ -1,4 +1,4 @@
-from plone.app.widgets.testing import PLONEAPPWIDGETS_DX_ROBOT_TESTING
+from collective.patterns.widgets.testing import PLONEAPPWIDGETS_DX_ROBOT_TESTING
 from plone.testing import layered
 import os
 import robotsuite

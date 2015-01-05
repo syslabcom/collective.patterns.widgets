@@ -5,9 +5,9 @@ from Products.ATContentTypes.interface import IATContentType
 from archetypes.schemaextender.interfaces import ISchemaModifier
 from archetypes.schemaextender.interfaces import IBrowserLayerAwareExtender
 
-from plone.app.widgets.interfaces import IWidgetsLayer
-from plone.app.widgets import at
-from plone.app.widgets.utils import first_weekday
+from collective.patterns.widgets.interfaces import IWidgetsLayer
+from collective.patterns.widgets import at
+from collective.patterns.widgets.utils import first_weekday
 
 _plone = MessageFactory('plone')
 

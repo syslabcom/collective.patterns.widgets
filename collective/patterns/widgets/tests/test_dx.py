@@ -6,11 +6,11 @@ from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
 from plone.app.testing import login
 from plone.app.testing import setRoles
-from plone.app.widgets.browser.vocabulary import VocabularyView
-from plone.app.widgets.interfaces import IWidgetsLayer
-from plone.app.widgets.testing import ExampleVocabulary
-from plone.app.widgets.testing import PLONEAPPWIDGETS_DX_INTEGRATION_TESTING
-from plone.app.widgets.testing import TestRequest
+from collective.patterns.widgets.browser.vocabulary import VocabularyView
+from collective.patterns.widgets.interfaces import IWidgetsLayer
+from collective.patterns.widgets.testing import ExampleVocabulary
+from collective.patterns.widgets.testing import PLONEAPPWIDGETS_DX_INTEGRATION_TESTING
+from collective.patterns.widgets.testing import TestRequest
 from plone.autoform.interfaces import WIDGETS_KEY
 from plone.autoform.interfaces import WRITE_PERMISSIONS_KEY
 from plone.dexterity.fti import DexterityFTI
@@ -65,8 +65,8 @@ class BaseWidgetTests(unittest.TestCase):
         self.maxDiff = 999999
 
     def test_widget_pattern_notimplemented(self):
-        from plone.app.widgets.dx import BaseWidget
-        from plone.app.widgets.utils import NotImplemented
+        from collective.patterns.widgets.dx import BaseWidget
+        from collective.patterns.widgets.utils import NotImplemented
 
         widget = BaseWidget(self.request)
         widget.field = self.field
@@ -85,9 +85,9 @@ class BaseWidgetTests(unittest.TestCase):
             widget._base_args())
 
     def test_widget_base_notimplemented(self):
-        from plone.app.widgets.dx import BaseWidget
-        from plone.app.widgets.base import InputWidget
-        from plone.app.widgets.utils import NotImplemented
+        from collective.patterns.widgets.dx import BaseWidget
+        from collective.patterns.widgets.base import InputWidget
+        from collective.patterns.widgets.utils import NotImplemented
 
         widget = BaseWidget(self.request)
         widget.field = self.field
@@ -107,7 +107,7 @@ class BaseWidgetTests(unittest.TestCase):
 class DateWidgetTests(unittest.TestCase):
 
     def setUp(self):
-        from plone.app.widgets.dx import DateWidget
+        from collective.patterns.widgets.dx import DateWidget
 
         self.request = TestRequest(environ={'HTTP_ACCEPT_LANGUAGE': 'en'})
         self.field = Date(__name__='datefield')
@@ -152,7 +152,7 @@ class DateWidgetTests(unittest.TestCase):
         )
 
     def test_data_converter(self):
-        from plone.app.widgets.dx import DateWidgetConverter
+        from collective.patterns.widgets.dx import DateWidgetConverter
         converter = DateWidgetConverter(self.field, self.widget)
 
         self.assertEqual(
@@ -186,8 +186,8 @@ class DateWidgetTests(unittest.TestCase):
         )
 
     def test_fieldwidget(self):
-        from plone.app.widgets.dx import DateWidget
-        from plone.app.widgets.dx import DateFieldWidget
+        from collective.patterns.widgets.dx import DateWidget
+        from collective.patterns.widgets.dx import DateFieldWidget
         field = Mock(__name__='field', title=u'', required=True)
         request = Mock()
         widget = DateFieldWidget(field, request)
@@ -199,7 +199,7 @@ class DateWidgetTests(unittest.TestCase):
 class DatetimeWidgetTests(unittest.TestCase):
 
     def setUp(self):
-        from plone.app.widgets.dx import DatetimeWidget
+        from collective.patterns.widgets.dx import DatetimeWidget
 
         self.request = TestRequest(environ={'HTTP_ACCEPT_LANGUAGE': 'en'})
         self.field = Datetime(__name__='datetimefield')
@@ -247,7 +247,7 @@ class DatetimeWidgetTests(unittest.TestCase):
         )
 
     def test_data_converter(self):
-        from plone.app.widgets.dx import DatetimeWidgetConverter
+        from collective.patterns.widgets.dx import DatetimeWidgetConverter
         converter = DatetimeWidgetConverter(self.field, self.widget)
 
         self.assertEqual(
@@ -283,7 +283,7 @@ class DatetimeWidgetTests(unittest.TestCase):
     def test_data_converter__no_timezone(self):
         """When no timezone is set, don't apply one.
         """
-        from plone.app.widgets.dx import DatetimeWidgetConverter
+        from collective.patterns.widgets.dx import DatetimeWidgetConverter
         context = Mock()
 
         dt = datetime(2013, 11, 13, 10, 20)
@@ -304,7 +304,7 @@ class DatetimeWidgetTests(unittest.TestCase):
     def test_data_converter__timezone_id(self):
         """When a (pytz) timezone id is set, use that.
         """
-        from plone.app.widgets.dx import DatetimeWidgetConverter
+        from collective.patterns.widgets.dx import DatetimeWidgetConverter
         context = Mock()
 
         dt = datetime(2013, 11, 13, 10, 20)
@@ -327,7 +327,7 @@ class DatetimeWidgetTests(unittest.TestCase):
         """When a timezone callback is set, returning a (pytz) timezone id,
         use that.
         """
-        from plone.app.widgets.dx import DatetimeWidgetConverter
+        from collective.patterns.widgets.dx import DatetimeWidgetConverter
         context = Mock()
 
         dt = datetime(2013, 11, 13, 10, 20)
@@ -347,8 +347,8 @@ class DatetimeWidgetTests(unittest.TestCase):
         self.widget.default_timezone = None
 
     def test_fieldwidget(self):
-        from plone.app.widgets.dx import DatetimeWidget
-        from plone.app.widgets.dx import DatetimeFieldWidget
+        from collective.patterns.widgets.dx import DatetimeWidget
+        from collective.patterns.widgets.dx import DatetimeFieldWidget
         field = Mock(__name__='field', title=u'', required=True)
         request = Mock()
         widget = DatetimeFieldWidget(field, request)
@@ -377,7 +377,7 @@ class SelectWidgetTests(unittest.TestCase):
         base.unregisterAdapter(term.CollectionTermsSource)
 
     def test_widget(self):
-        from plone.app.widgets.dx import SelectWidget
+        from collective.patterns.widgets.dx import SelectWidget
         widget = SelectWidget(self.request)
         widget.id = 'test-widget'
         widget.field = Choice(
@@ -478,7 +478,7 @@ class SelectWidgetTests(unittest.TestCase):
         )
 
     def test_widget_list_orderable(self):
-        from plone.app.widgets.dx import SelectWidget
+        from collective.patterns.widgets.dx import SelectWidget
         widget = SelectWidget(self.request)
         widget.id = 'test-widget'
         widget.separator = '.'
@@ -505,7 +505,7 @@ class SelectWidgetTests(unittest.TestCase):
         )
 
     def test_widget_tuple_orderable(self):
-        from plone.app.widgets.dx import SelectWidget
+        from collective.patterns.widgets.dx import SelectWidget
         widget = SelectWidget(self.request)
         widget.id = 'test-widget'
         widget.field = Tuple(
@@ -531,7 +531,7 @@ class SelectWidgetTests(unittest.TestCase):
         )
 
     def test_widget_set_not_orderable(self):
-        from plone.app.widgets.dx import SelectWidget
+        from collective.patterns.widgets.dx import SelectWidget
         widget = SelectWidget(self.request)
         widget.id = 'test-widget'
         # A set is not orderable
@@ -558,7 +558,7 @@ class SelectWidgetTests(unittest.TestCase):
         )
 
     def test_widget_extract(self):
-        from plone.app.widgets.dx import SelectWidget
+        from collective.patterns.widgets.dx import SelectWidget
         widget = SelectWidget(self.request)
         widget.field = Choice(
             __name__='selectfield',
@@ -572,8 +572,8 @@ class SelectWidgetTests(unittest.TestCase):
         self.assertEquals(widget.extract(), 'one;two')
 
     def test_data_converter_list(self):
-        from plone.app.widgets.dx import SelectWidget
-        from plone.app.widgets.dx import SelectWidgetConverter
+        from collective.patterns.widgets.dx import SelectWidget
+        from collective.patterns.widgets.dx import SelectWidgetConverter
 
         field = List(__name__='listfield',
                      value_type=Choice(__name__='selectfield',
@@ -614,8 +614,8 @@ class SelectWidgetTests(unittest.TestCase):
         )
 
     def test_data_converter_tuple(self):
-        from plone.app.widgets.dx import SelectWidget
-        from plone.app.widgets.dx import SelectWidgetConverter
+        from collective.patterns.widgets.dx import SelectWidget
+        from collective.patterns.widgets.dx import SelectWidgetConverter
 
         field = Tuple(__name__='tuplefield',
                       value_type=Choice(__name__='selectfield',
@@ -646,8 +646,8 @@ class SelectWidgetTests(unittest.TestCase):
         )
 
     def test_data_converter_handles_empty_value(self):
-        from plone.app.widgets.dx import SelectWidget
-        from plone.app.widgets.dx import SelectWidgetConverter
+        from collective.patterns.widgets.dx import SelectWidget
+        from collective.patterns.widgets.dx import SelectWidgetConverter
 
         field = Tuple(__name__='tuplefield',
                       value_type=Choice(__name__='selectfield',
@@ -673,7 +673,7 @@ class AjaxSelectWidgetTests(unittest.TestCase):
         provideUtility(ExampleVocabulary(), name=u'example')
 
     def test_widget(self):
-        from plone.app.widgets.dx import AjaxSelectWidget
+        from collective.patterns.widgets.dx import AjaxSelectWidget
         widget = AjaxSelectWidget(self.request)
         widget.update()
         self.assertEqual(
@@ -716,7 +716,7 @@ class AjaxSelectWidgetTests(unittest.TestCase):
         )
 
     def test_widget_list_orderable(self):
-        from plone.app.widgets.dx import AjaxSelectWidget
+        from collective.patterns.widgets.dx import AjaxSelectWidget
         widget = AjaxSelectWidget(self.request)
         widget.field = List(__name__='selectfield')
         self.assertEqual(
@@ -730,7 +730,7 @@ class AjaxSelectWidgetTests(unittest.TestCase):
         )
 
     def test_widget_tuple_orderable(self):
-        from plone.app.widgets.dx import AjaxSelectWidget
+        from collective.patterns.widgets.dx import AjaxSelectWidget
         widget = AjaxSelectWidget(self.request)
         widget.field = Tuple(__name__='selectfield')
         self.assertEqual(
@@ -744,7 +744,7 @@ class AjaxSelectWidgetTests(unittest.TestCase):
         )
 
     def test_widget_set_not_orderable(self):
-        from plone.app.widgets.dx import AjaxSelectWidget
+        from collective.patterns.widgets.dx import AjaxSelectWidget
         widget = AjaxSelectWidget(self.request)
         # A set is not orderable
         widget.field = Set(__name__='selectfield')
@@ -759,7 +759,7 @@ class AjaxSelectWidgetTests(unittest.TestCase):
         )
 
     def test_widget_choice(self):
-        from plone.app.widgets.dx import AjaxSelectWidget
+        from collective.patterns.widgets.dx import AjaxSelectWidget
         from zope.schema.interfaces import ISource
         widget = AjaxSelectWidget(self.request)
         source = Mock()
@@ -782,7 +782,7 @@ class AjaxSelectWidgetTests(unittest.TestCase):
         )
 
     def test_widget_addform_url_on_addform(self):
-        from plone.app.widgets.dx import AjaxSelectWidget
+        from collective.patterns.widgets.dx import AjaxSelectWidget
         widget = AjaxSelectWidget(self.request)
         form = Mock()
         from zope.interface import directlyProvides
@@ -815,8 +815,8 @@ class AjaxSelectWidgetTests(unittest.TestCase):
         )
 
     def test_data_converter_list(self):
-        from plone.app.widgets.dx import AjaxSelectWidget
-        from plone.app.widgets.dx import AjaxSelectWidgetConverter
+        from collective.patterns.widgets.dx import AjaxSelectWidget
+        from collective.patterns.widgets.dx import AjaxSelectWidgetConverter
 
         field = List(__name__='listfield', value_type=TextLine())
         widget = AjaxSelectWidget(self.request)
@@ -844,8 +844,8 @@ class AjaxSelectWidgetTests(unittest.TestCase):
         )
 
     def test_data_converter_tuple(self):
-        from plone.app.widgets.dx import AjaxSelectWidget
-        from plone.app.widgets.dx import AjaxSelectWidgetConverter
+        from collective.patterns.widgets.dx import AjaxSelectWidget
+        from collective.patterns.widgets.dx import AjaxSelectWidgetConverter
 
         field = Tuple(__name__='tuplefield', value_type=TextLine())
         widget = AjaxSelectWidget(self.request)
@@ -873,8 +873,8 @@ class AjaxSelectWidgetTests(unittest.TestCase):
         )
 
     def test_fieldwidget(self):
-        from plone.app.widgets.dx import AjaxSelectWidget
-        from plone.app.widgets.dx import AjaxSelectFieldWidget
+        from collective.patterns.widgets.dx import AjaxSelectWidget
+        from collective.patterns.widgets.dx import AjaxSelectFieldWidget
         field = Mock(__name__='field', title=u'', required=True)
         request = Mock()
         widget = AjaxSelectFieldWidget(field, request)
@@ -883,8 +883,8 @@ class AjaxSelectWidgetTests(unittest.TestCase):
         self.assertIs(widget.request, request)
 
     def test_fieldwidget_sequence(self):
-        from plone.app.widgets.dx import AjaxSelectWidget
-        from plone.app.widgets.dx import AjaxSelectFieldWidget
+        from collective.patterns.widgets.dx import AjaxSelectWidget
+        from collective.patterns.widgets.dx import AjaxSelectFieldWidget
         field = Mock(__name__='field', title=u'', required=True)
         vocabulary = Mock()
         request = Mock()
@@ -900,19 +900,19 @@ class QueryStringWidgetTests(unittest.TestCase):
         self.request = TestRequest(environ={'HTTP_ACCEPT_LANGUAGE': 'en'})
 
     def test_converter_toWidgetValue(self):
-        from plone.app.widgets.dx import QueryStringDataConverter
+        from collective.patterns.widgets.dx import QueryStringDataConverter
         converter = QueryStringDataConverter(List(), None)
         self.assertEqual(converter.toWidgetValue(None), u'[]')
         self.assertEqual(converter.toWidgetValue([]), u'[]')
 
     def test_converter_empty_value(self):
-        from plone.app.widgets.dx import QueryStringDataConverter
+        from collective.patterns.widgets.dx import QueryStringDataConverter
         converter = QueryStringDataConverter(List(), None)
         self.assertEqual(converter.toFieldValue(u''), None)
         self.assertEqual(converter.toFieldValue(u'[]'), None)
 
     def test_widget(self):
-        from plone.app.widgets.dx import QueryStringWidget
+        from collective.patterns.widgets.dx import QueryStringWidget
         widget = QueryStringWidget(self.request)
         self.assertEqual(
             {
@@ -935,7 +935,7 @@ class RelatedItemsWidgetTests(unittest.TestCase):
         self.request = TestRequest(environ={'HTTP_ACCEPT_LANGUAGE': 'en'})
 
     def test_widget(self):
-        from plone.app.widgets.dx import RelatedItemsWidget
+        from collective.patterns.widgets.dx import RelatedItemsWidget
         context = Mock(absolute_url=lambda: 'fake_url')
         context.portal_properties.site_properties\
             .getProperty.return_value = ['SomeType']
@@ -963,7 +963,7 @@ class RelatedItemsWidgetTests(unittest.TestCase):
     def test_single_selection(self):
         """The pattern_options value for maximumSelectionSize should
         be 1 when the field only allows a single selection."""
-        from plone.app.widgets.dx import RelatedItemsFieldWidget
+        from collective.patterns.widgets.dx import RelatedItemsFieldWidget
         context = Mock(absolute_url=lambda: 'fake_url')
         context.portal_properties.site_properties\
             .getProperty.return_value = ['SomeType']
@@ -981,7 +981,7 @@ class RelatedItemsWidgetTests(unittest.TestCase):
     def test_multiple_selection(self):
         """The pattern_options key maximumSelectionSize shouldn't be
         set when the field allows multiple selections"""
-        from plone.app.widgets.dx import RelatedItemsFieldWidget
+        from collective.patterns.widgets.dx import RelatedItemsFieldWidget
         from zope.schema.interfaces import ISource
         from zope.schema.vocabulary import VocabularyRegistry
 
@@ -1008,7 +1008,7 @@ class RelatedItemsWidgetTests(unittest.TestCase):
             )
 
     def test_converter_RelationChoice(self):
-        from plone.app.widgets.dx import \
+        from collective.patterns.widgets.dx import \
             RelationChoiceRelatedItemsWidgetConverter
         brain = Mock(getObject=Mock(return_value='obj'))
         portal_catalog = Mock(return_value=[brain])
@@ -1016,19 +1016,19 @@ class RelatedItemsWidgetTests(unittest.TestCase):
         converter = RelationChoiceRelatedItemsWidgetConverter(
             TextLine(), widget)
 
-        with mock.patch('plone.app.widgets.dx.IUUID', return_value='id'):
+        with mock.patch('collective.patterns.widgets.dx.IUUID', return_value='id'):
             self.assertEqual(converter.toWidgetValue('obj'), 'id')
         self.assertEqual(converter.toWidgetValue(None), None)
 
         with mock.patch(
-                'plone.app.widgets.dx.getToolByName',
+                'collective.patterns.widgets.dx.getToolByName',
                 return_value=portal_catalog):
             self.assertEqual(converter.toFieldValue('id'), 'obj')
         self.assertEqual(converter.toFieldValue(None), None)
 
     def test_converter_RelationList(self):
-        from plone.app.widgets.dx import RelatedItemsDataConverter
-        from plone.app.widgets.dx import IRelationList
+        from collective.patterns.widgets.dx import RelatedItemsDataConverter
+        from collective.patterns.widgets.dx import IRelationList
         field = List()
         alsoProvides(field, IRelationList)
         brain1 = Mock(getObject=Mock(return_value='obj1'), UID='id1')
@@ -1039,19 +1039,19 @@ class RelatedItemsWidgetTests(unittest.TestCase):
 
         self.assertEqual(converter.toWidgetValue(None), None)
         with mock.patch(
-                'plone.app.widgets.dx.IUUID', side_effect=['id1', 'id2']):
+                'collective.patterns.widgets.dx.IUUID', side_effect=['id1', 'id2']):
             self.assertEqual(
                 converter.toWidgetValue(['obj1', 'obj2']), 'id1;id2')
 
         self.assertEqual(converter.toFieldValue(None), None)
         with mock.patch(
-                'plone.app.widgets.dx.getToolByName',
+                'collective.patterns.widgets.dx.getToolByName',
                 return_value=portal_catalog):
             self.assertEqual(
                 converter.toFieldValue('id1;id2'), ['obj1', 'obj2'])
 
     def test_converter_List_of_Choice(self):
-        from plone.app.widgets.dx import RelatedItemsDataConverter
+        from collective.patterns.widgets.dx import RelatedItemsDataConverter
         field = List()
         widget = Mock(separator=';')
         converter = RelatedItemsDataConverter(field, widget)
@@ -1065,8 +1065,8 @@ class RelatedItemsWidgetTests(unittest.TestCase):
             converter.toFieldValue('id1;id2'), ['id1', 'id2'])
 
     def test_fieldwidget(self):
-        from plone.app.widgets.dx import RelatedItemsWidget
-        from plone.app.widgets.dx import RelatedItemsFieldWidget
+        from collective.patterns.widgets.dx import RelatedItemsWidget
+        from collective.patterns.widgets.dx import RelatedItemsFieldWidget
         field = Mock(__name__='field', title=u'', required=True)
         vocabulary = Mock()
         request = Mock()
@@ -1081,13 +1081,13 @@ def add_mock_fti(portal):
     fti = DexterityFTI('dx_mock')
     portal.portal_types._setObject('dx_mock', fti)
     fti.klass = 'plone.dexterity.content.Item'
-    fti.schema = 'plone.app.widgets.tests.test_dx.IMockSchema'
+    fti.schema = 'collective.patterns.widgets.tests.test_dx.IMockSchema'
     fti.filter_content_types = False
     fti.behaviors = ('plone.app.dexterity.behaviors.metadata.IBasic',)
 
 
 def _custom_field_widget(field, request):
-    from plone.app.widgets.dx import AjaxSelectWidget
+    from collective.patterns.widgets.dx import AjaxSelectWidget
     widget = FieldWidget(field, AjaxSelectWidget(request))
     widget.vocabulary = 'plone.app.vocabularies.PortalTypes'
     return widget
@@ -1121,7 +1121,7 @@ class RichTextWidgetTests(unittest.TestCase):
         self.field = IWithText['text']
 
     def test_widget_params(self):
-        from plone.app.widgets.dx import RichTextWidget
+        from collective.patterns.widgets.dx import RichTextWidget
 
         widget = FieldWidget(self.field, RichTextWidget(self.request))
         # set the context so we can get tinymce settings
@@ -1143,7 +1143,7 @@ class RichTextWidgetTests(unittest.TestCase):
                              self.portal.portal_tinymce.anchor_selector)
 
     def test_widget_values(self):
-        from plone.app.widgets.dx import RichTextWidget
+        from collective.patterns.widgets.dx import RichTextWidget
         from plone.app.textfield.value import RichTextValue
 
         widget = FieldWidget(self.field, RichTextWidget(self.request))
@@ -1170,7 +1170,7 @@ class RichTextWidgetTests(unittest.TestCase):
         if IMarkupSchema:
             # if not, don't run this test
             self._set_mimetypes(allowed=('text/html',))
-            from plone.app.widgets.dx import RichTextWidget
+            from collective.patterns.widgets.dx import RichTextWidget
             widget = FieldWidget(self.field, RichTextWidget(self.request))
             # set the context so we can get tinymce settings
             widget.context = self.portal
@@ -1188,7 +1188,7 @@ class RichTextWidgetTests(unittest.TestCase):
         if IMarkupSchema:
             # if not, don't run this test
             self._set_mimetypes(allowed=('text/html', 'text/plain'))
-            from plone.app.widgets.dx import RichTextWidget
+            from collective.patterns.widgets.dx import RichTextWidget
             widget = FieldWidget(self.field, RichTextWidget(self.request))
             # set the context so we can get tinymce settings
             widget.context = self.portal
@@ -1209,7 +1209,7 @@ class RichTextWidgetTests(unittest.TestCase):
         if IMarkupSchema:
             # if not, don't run this test
             self._set_mimetypes(allowed=('text/html', 'text/plain'))
-            from plone.app.widgets.dx import RichTextWidget
+            from collective.patterns.widgets.dx import RichTextWidget
             from plone.app.textfield.value import RichTextValue
             widget = FieldWidget(self.field, RichTextWidget(self.request))
             # set the context so we can get tinymce settings

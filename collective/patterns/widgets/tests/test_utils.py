@@ -29,7 +29,7 @@ class UtilsTests(unittest.TestCase):
             from plone.app.event import base
             base.first_weekday = lambda: 0
             base.wkday_to_mon1 = lambda x: x
-            from plone.app.widgets import utils
+            from collective.patterns.widgets import utils
             reload(utils)  # reload utils, so that plone.app.event mock import
                            # works, even if it was imported before.,,
             orig_HAS_PAE = utils.HAS_PAE

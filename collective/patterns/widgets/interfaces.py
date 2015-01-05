@@ -4,7 +4,8 @@ from zope.filerepresentation.interfaces import IFileFactory
 
 
 class IWidgetsLayer(IPloneFormLayer):
-    """Browser layer used to indicate that plone.app.widgets is installed
+    """Browser layer used to indicate that collective.patterns.widgets is
+    installed
     """
 
 

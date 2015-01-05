@@ -6,7 +6,7 @@ from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.Five import BrowserView
 from logging import getLogger
 from plone.app.querystring import queryparser
-from plone.app.widgets.interfaces import IFieldPermissionChecker
+from collective.patterns.widgets.interfaces import IFieldPermissionChecker
 from plone.autoform.interfaces import WRITE_PERMISSIONS_KEY
 from plone.supermodel.utils import mergedTaggedValueDict
 from types import FunctionType

@@ -8,19 +8,19 @@ from lxml import etree
 from plone.app.textfield.value import RichTextValue
 from plone.app.textfield.widget import IRichTextWidget as patextfield_IRichTextWidget  # noqa
 from plone.app.textfield.widget import RichTextWidget as patextfield_RichTextWidget  # noqa
-from plone.app.widgets.base import InputWidget
-from plone.app.widgets.base import SelectWidget as BaseSelectWidget
-from plone.app.widgets.base import TextareaWidget
-from plone.app.widgets.base import dict_merge
-from plone.app.widgets.interfaces import IFieldPermissionChecker
-from plone.app.widgets.interfaces import IWidgetsLayer
-from plone.app.widgets.utils import NotImplemented
-from plone.app.widgets.utils import get_ajaxselect_options
-from plone.app.widgets.utils import get_date_options
-from plone.app.widgets.utils import get_datetime_options
-from plone.app.widgets.utils import get_querystring_options
-from plone.app.widgets.utils import get_relateditems_options
-from plone.app.widgets.utils import get_tinymce_options
+from collective.patterns.widgets.base import InputWidget
+from collective.patterns.widgets.base import SelectWidget as BaseSelectWidget
+from collective.patterns.widgets.base import TextareaWidget
+from collective.patterns.widgets.base import dict_merge
+from collective.patterns.widgets.interfaces import IFieldPermissionChecker
+from collective.patterns.widgets.interfaces import IWidgetsLayer
+from collective.patterns.widgets.utils import NotImplemented
+from collective.patterns.widgets.utils import get_ajaxselect_options
+from collective.patterns.widgets.utils import get_date_options
+from collective.patterns.widgets.utils import get_datetime_options
+from collective.patterns.widgets.utils import get_querystring_options
+from collective.patterns.widgets.utils import get_relateditems_options
+from collective.patterns.widgets.utils import get_tinymce_options
 from plone.autoform.interfaces import WIDGETS_KEY
 from plone.autoform.interfaces import WRITE_PERMISSIONS_KEY
 from plone.autoform.utils import resolveDottedName

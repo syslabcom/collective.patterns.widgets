@@ -6,8 +6,8 @@ from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
 from plone.app.testing.layers import FunctionalTesting
 from plone.app.testing.layers import IntegrationTesting
-from plone.app.widgets.dx import SelectWidget
-from plone.app.widgets.interfaces import IWidgetsLayer
+from collective.patterns.widgets.dx import SelectWidget
+from collective.patterns.widgets.interfaces import IWidgetsLayer
 from plone.autoform import directives
 from plone.autoform.form import AutoExtensibleForm
 from plone.testing import z2
@@ -79,12 +79,12 @@ class PloneAppWidgetsLayer(PloneSandboxLayer):
         import plone.app.dexterity
         self.loadZCML(name='meta.zcml', package=plone.app.dexterity)
         self.loadZCML(package=plone.app.dexterity)
-        import plone.app.widgets
-        self.loadZCML(package=plone.app.widgets)
+        import collective.patterns.widgets
+        self.loadZCML(package=collective.patterns.widgets)
 
     def setUpPloneSite(self, portal):
         self.applyProfile(portal, 'plone.app.dexterity:default')
-        self.applyProfile(portal, 'plone.app.widgets:default')
+        self.applyProfile(portal, 'collective.patterns.widgets:default')
 
 
 PLONEAPPWIDGETS_FIXTURE = PloneAppWidgetsLayer()
@@ -100,8 +100,8 @@ class PloneAppWidgetsDXLayer(PloneAppWidgetsLayer):
                        plone.app.contenttypes,
                        context=configurationContext)
 
-        import plone.app.widgets.tests
-        xmlconfig.file('configure.zcml', plone.app.widgets.tests,
+        import collective.patterns.widgets.tests
+        xmlconfig.file('configure.zcml', collective.patterns.widgets.tests,
                        context=configurationContext)
 
         try:

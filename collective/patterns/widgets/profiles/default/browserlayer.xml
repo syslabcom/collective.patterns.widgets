@@ -1,0 +1,4 @@
+<layers>
+    <layer name="plone.app.widgets" 
+           interface="collective.patterns.widgets.interfaces.IWidgetsLayer" />
+</layers>

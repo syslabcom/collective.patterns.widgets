@@ -201,7 +201,7 @@
 
     <configure zcml:condition="installed Products.ATContentTypes">
       <adapter
-          name="plone.app.widgets"
+          name="collective.patterns.widgets"
           factory=".at_bbb.MetadataExtender"
           for="Products.ATContentTypes.interface.IATContentType"
           provides="archetypes.schemaextender.interfaces.ISchemaModifier"
@@ -281,9 +281,9 @@
   <genericsetup:registerProfile
     zcml:condition="not-have plone-5"
     name="default"
-    title="Plone Widgets"
+    title="Plone Patternslib Widgets"
     directory="profiles/default"
-    description="Better widgets for Plone"
+    description="Patternslib based widgets for Plone"
     provides="Products.GenericSetup.interfaces.EXTENSION"
     for="Products.CMFPlone.interfaces.IPloneSiteRoot"
     />
@@ -299,8 +299,8 @@
     />
 
   <genericsetup:importStep
-    name="plone.app.widgets-default"
-    title="plone.app.widgets: Deprecate resource"
+    name="collective.patterns.widgets-default"
+    title="collective.patterns.widgets: Deprecate resource"
     description=""
     handler=".setuphandlers.default">
       <depends name="jsregistry"/>
@@ -317,8 +317,8 @@
     />
 
   <genericsetup:importStep
-    name="plone.app.widgets-uninstall"
-    title="plone.app.widgets: Restore resource"
+    name="collective.patterns.widgets-uninstall"
+    title="collective.patterns.widgets: Restore resource"
     description=""
     handler=".setuphandlers.uninstall">
       <depends name="jsregistry"/>

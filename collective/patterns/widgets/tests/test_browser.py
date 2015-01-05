@@ -6,15 +6,15 @@ from plone.app.testing import TEST_USER_NAME
 from plone.app.testing import login
 from plone.app.testing import logout
 from plone.app.testing import setRoles
-from plone.app.widgets.browser import vocabulary
-from plone.app.widgets.browser.file import FileUploadView
-from plone.app.widgets.browser.query import QueryStringIndexOptions
-from plone.app.widgets.browser.vocabulary import VocabularyView
-from plone.app.widgets.interfaces import IFieldPermissionChecker
-from plone.app.widgets.testing import ExampleFunctionVocabulary
-from plone.app.widgets.testing import ExampleVocabulary
-from plone.app.widgets.testing import PLONEAPPWIDGETS_INTEGRATION_TESTING
-from plone.app.widgets.testing import TestRequest
+from collective.patterns.widgets.browser import vocabulary
+from collective.patterns.widgets.browser.file import FileUploadView
+from collective.patterns.widgets.browser.query import QueryStringIndexOptions
+from collective.patterns.widgets.browser.vocabulary import VocabularyView
+from collective.patterns.widgets.interfaces import IFieldPermissionChecker
+from collective.patterns.widgets.testing import ExampleFunctionVocabulary
+from collective.patterns.widgets.testing import ExampleVocabulary
+from collective.patterns.widgets.testing import PLONEAPPWIDGETS_INTEGRATION_TESTING
+from collective.patterns.widgets.testing import TestRequest
 from zope.component import provideAdapter
 from zope.component import provideUtility
 from zope.component.globalregistry import base
@@ -297,7 +297,7 @@ class BrowserTest(unittest.TestCase):
         widget.field = Choice(source=DummyCatalogSource())
         widget.field.interface = Interface
 
-        from plone.app.widgets.browser.vocabulary import SourceView
+        from collective.patterns.widgets.browser.vocabulary import SourceView
         view = SourceView(widget, self.request)
         query = {
             'criteria': [
@@ -338,7 +338,7 @@ class BrowserTest(unittest.TestCase):
         widget.field = List(value_type=Choice(source=DummySource()))
         widget.field.interface = Interface
 
-        from plone.app.widgets.browser.vocabulary import SourceView
+        from collective.patterns.widgets.browser.vocabulary import SourceView
         view = SourceView(widget, self.request)
         query = {
             'criteria': [
@@ -377,7 +377,7 @@ class BrowserTest(unittest.TestCase):
         widget.field = Choice(source=DummyCatalogSource())
         widget.field.interface = Interface
 
-        from plone.app.widgets.browser.vocabulary import SourceView
+        from collective.patterns.widgets.browser.vocabulary import SourceView
         view = SourceView(widget, self.request)
         query = {
             'criteria': [

@@ -3,9 +3,9 @@ from setuptools import setup, find_packages
 version = '1.8.0.dev0'
 
 setup(
-    name='plone.app.widgets',
+    name='collective.patterns.widgets',
     version=version,
-    description="better plone widgets",
+    description="patternslib based plone widgets",
     long_description='%s\n%s' % (
         open("README.rst").read(),
         open("CHANGES.rst").read(),
@@ -17,10 +17,10 @@ setup(
     keywords='plone widgets z3cform archetypes',
     author='Nathan Van Gheem',
     author_email='vangheem@gmail.com',
-    url='https://github.com/plone/plone.app.widgets',
+    url='https://github.com/syslabcom/collective.patterns.widgets',
     license='GPL',
     packages=find_packages(),
-    namespace_packages=['plone', 'plone.app'],
+    namespace_packages=['collective', 'collective.patterns'],
     include_package_data=True,
     zip_safe=False,
     install_requires=[
@@ -35,7 +35,7 @@ setup(
     extras_require={
         'test': [
             'plone.app.robotframework[debug]',
-            'plone.app.widgets[archetypes, dexterity]',
+            'collective.patterns.widgets[archetypes, dexterity]',
             'plone.app.testing>=4.2.4',  # we need ROBOT_TEST_LEVEL
             'mock',
         ],

@@ -26,7 +26,7 @@ except ImportError:  # pragma: no cover
     class IStorage(Interface):
         pass
 from plone.i18n.normalizer.interfaces import IFileNameNormalizer
-from plone.app.widgets.interfaces import IATCTFileFactory, IDXFileFactory
+from collective.patterns.widgets.interfaces import IATCTFileFactory, IDXFileFactory
 
 upload_lock = allocate_lock()
 

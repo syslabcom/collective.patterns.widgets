@@ -98,8 +98,10 @@ class BaseWidget(object):
     def update(self):
         """Updating pattern_options in element `data-*` attribute."""
         if self.pattern_options:
+            #XXX improve str(value)
             self.el.attrib['data-' + self._klass_prefix + self.pattern] = \
-                json.dumps(self.pattern_options)
+                '; '.join([key + ': ' + str(value) for key, value
+                          in self.pattern_options.items()])
 
     def render(self):
         """Renders the widget

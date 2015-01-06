@@ -154,13 +154,14 @@ class BaseVocabularyView(BrowserView):
             for item in results:
                 items.append({'id': item.token, 'text': item.title})
 
+        #XXX only do this for mutable vocabularies like Keywords
+        query_str = self.request.get('q', '')
+        items.append({'id': query_str, 'text': query_str})
+
         if total == 0:
             total = len(items)
 
-        return json.dumps({
-            'results': items,
-            'total': total
-        })
+        return json.dumps(items)
 
     def parsed_query(self, ):
         query = _parseJSON(self.request.get('query', '')) or {}

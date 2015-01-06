@@ -90,16 +90,16 @@ def get_datetime_options(request):
 
 def get_ajaxselect_options(context, value, separator, vocabulary_name,
                            vocabulary_view, field_name=None):
-    options = {'separator': separator}
+    options = {}
     if vocabulary_name:
-        options['vocabularyUrl'] = '{}/{}?name={}'.format(
+        options['ajax-url'] = '{}/{}?name={}'.format(
             get_context_url(context), vocabulary_view, vocabulary_name)
         if field_name:
-            options['vocabularyUrl'] += '&field={}'.format(field_name)
+            options['ajax-url'] += '&field={}'.format(field_name)
         if value:
             vocabulary = queryUtility(IVocabularyFactory, vocabulary_name)
             if vocabulary:
-                options['initialValues'] = {}
+                options['data'] = {}
                 vocabulary = vocabulary(context)
                 # Catalog
                 if vocabulary_name == 'plone.app.vocabularies.Catalog':
@@ -109,14 +109,15 @@ def get_ajaxselect_options(context, value, separator, vocabulary_name,
                     except AttributeError:
                         catalog = getToolByName(getSite(), 'portal_catalog')
                     for item in catalog(UID=uids):
-                        options['initialValues'][item.UID] = item.Title
+                        options['data'][item.UID] = item.Title
                 else:
                     for value in value.split(separator):
                         try:
                             term = vocabulary.getTerm(value)
-                            options['initialValues'][term.token] = term.title
+                            options['data'][term.token] = term.title
                         except LookupError:
-                            options['initialValues'][value] = value
+                            options['data'][value] = value
+    options['ajax-data-type'] = 'json'
     return options
 
 
@@ -185,7 +186,7 @@ def get_tinymce_options(context, field, request):
         config['content_css'] = '++resource++plone.app.widgets-tinymce-content.css'
         args['pattern_options'] = {
             'relatedItems': {
-                'vocabularyUrl': config['portal_url'] +
+                'ajax-url': config['portal_url'] +
                 '/@@getVocabulary?name=plone.app.vocabularies.Catalog'
             },
             'upload': {

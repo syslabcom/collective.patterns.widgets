@@ -560,7 +560,7 @@ class SelectWidget(BaseWidget, z3cform_SelectWidget):
 
     implementsOnly(ISelectWidget)
 
-    pattern = 'select2'
+    pattern = 'autosuggest'
     pattern_options = BaseWidget.pattern_options.copy()
 
     separator = ';'
@@ -635,10 +635,10 @@ class AjaxSelectWidget(BaseWidget, z3cform_TextWidget):
 
     implementsOnly(IAjaxSelectWidget)
 
-    pattern = 'select2'
+    pattern = 'autosuggest'
     pattern_options = BaseWidget.pattern_options.copy()
 
-    separator = ';'
+    separator = ','
     vocabulary = None
     vocabulary_view = '@@getVocabulary'
     orderable = False
@@ -689,7 +689,7 @@ class AjaxSelectWidget(BaseWidget, z3cform_TextWidget):
         if field and getattr(field, 'vocabulary', None):
             form_url = self.request.getURL()
             source_url = "%s/++widget++%s/@@getSource" % (form_url, self.name)
-            args['pattern_options']['vocabularyUrl'] = source_url
+            args['pattern_options']['ajax-url'] = source_url
 
         # ISequence represents an orderable collection
         if ISequence.providedBy(self.field) or self.orderable:
@@ -757,7 +757,7 @@ class RelatedItemsWidget(BaseWidget, z3cform_TextWidget):
                 form_url = self.request.getURL()
                 source_url = "%s/++widget++%s/@@getSource" % (
                     form_url, self.name)
-                args['pattern_options']['vocabularyUrl'] = source_url
+                args['pattern_options']['ajax-url'] = source_url
 
         return args
 
@@ -941,12 +941,12 @@ def RelatedItemsFieldWidget(field, request, extra=None):
 
 
 if HAS_PAC:
-    @adapter(getSpecification(IDXCollection['query']), IFormLayer)
+    @adapter(getSpecification(IDXCollection['query']), IWidgetsLayer)
     @implementer(IFieldWidget)
     def QueryStringFieldWidget(field, request):
         return FieldWidget(field, QueryStringWidget(request))
 
-    @adapter(getSpecification(IRichText['text']), IFormLayer)
+    @adapter(getSpecification(IRichText['text']), IWidgetsLayer)
     @implementer(IFieldWidget)
     def RichTextFieldWidget(field, request):
         return FieldWidget(field, RichTextWidget(request))

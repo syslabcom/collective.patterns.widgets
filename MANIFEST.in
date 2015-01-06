@@ -1,3 +1,41 @@
 include *.rst
 recursive-include plone/app/widgets *
 global-exclude *.pyc
+
+# added by check_manifest.py
+include *.GPL
+include *.in
+include *.nix
+include *.py
+include *.txt
+include .travis.yml
+include Makefile
+include develop.cfg
+include sphinx.cfg
+include travis.cfg
+include versions.cfg
+recursive-include collective *.cpt
+recursive-include collective *.cpy
+recursive-include collective *.css
+recursive-include collective *.eot
+recursive-include collective *.gif
+recursive-include collective *.js
+recursive-include collective *.json
+recursive-include collective *.map
+recursive-include collective *.md
+recursive-include collective *.metadata
+recursive-include collective *.png
+recursive-include collective *.po
+recursive-include collective *.pot
+recursive-include collective *.pt
+recursive-include collective *.robot
+recursive-include collective *.svg
+recursive-include collective *.ttf
+recursive-include collective *.txt
+recursive-include collective *.woff
+recursive-include collective *.xml
+recursive-include collective *.zcml
+recursive-include docs *.doctree
+recursive-include docs *.pickle
+recursive-include docs *.py
+recursive-include docs *.rst

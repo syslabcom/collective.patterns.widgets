@@ -121,6 +121,10 @@ class BaseVocabularyView(BrowserView):
         # build result items
         items = []
 
+        #XXX only do this for mutable vocabularies like Keywords
+        query_str = self.request.get('q', '')
+        items.append({'id': query_str, 'text': query_str})
+
         attributes = _parseJSON(self.request.get('attributes', ''))
         if isinstance(attributes, basestring) and attributes:
             attributes = attributes.split(',')
@@ -153,10 +157,6 @@ class BaseVocabularyView(BrowserView):
         else:
             for item in results:
                 items.append({'id': item.token, 'text': item.title})
-
-        #XXX only do this for mutable vocabularies like Keywords
-        query_str = self.request.get('q', '')
-        items.append({'id': query_str, 'text': query_str})
 
         if total == 0:
             total = len(items)

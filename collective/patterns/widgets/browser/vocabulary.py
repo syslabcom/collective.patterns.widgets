@@ -89,7 +89,11 @@ class BaseVocabularyView(BrowserView):
             else:
                 results = vocabulary.search(query)
         else:
-            results = vocabulary
+            query_str = self.request.get('q', '')
+            query = {}
+            query['SearchableText'] = {'query': query_str}
+            results = [term for term in vocabulary
+                       if query_str.lower() in term.title.lower()]
 
         try:
             total = len(results)
@@ -121,8 +125,8 @@ class BaseVocabularyView(BrowserView):
         # build result items
         items = []
 
+        query_str = query['SearchableText']['query']
         #XXX only do this for mutable vocabularies like Keywords
-        query_str = self.request.get('q', '')
         items.append({'id': query_str, 'text': query_str})
 
         attributes = _parseJSON(self.request.get('attributes', ''))

@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.8.0 (unreleased)
+1.8.0 (2015-01-06)
 ------------------
 
 - Include TinyMCE languages from mockup.

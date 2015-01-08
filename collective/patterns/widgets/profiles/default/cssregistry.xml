@@ -3,10 +3,15 @@
 
     <stylesheet bundle="deprecated" id="++resource++tinymce.stylesheets/tinymce.css" />
     <stylesheet bundle="deprecated" id="++resource++plone.app.jquerytools.dateinput.css" />
+    <stylesheet bundle="deprecated" id="++resource++collection.css" />
+
+    <!-- XXX: plone.app.widgets deprecates these stylesheets because they get
+         replaced with Mockup widgets. We don't yet have Patternslib widgets for these, so we don't deprecate them.
+
     <stylesheet bundle="deprecated" id="++resource++plone.formwidget.autocomplete/jquery.autocomplete.css" />
     <stylesheet bundle="deprecated" id="++resource++plone.formwidget.contenttree/contenttree.css" />
     <stylesheet bundle="deprecated" id="++resource++plone.formwidget.querystring.querywidget.css" />
-    <stylesheet bundle="deprecated" id="++resource++collection.css" />
+    -->
 
 
     <stylesheet

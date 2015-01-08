@@ -117,6 +117,7 @@ def get_ajaxselect_options(context, value, separator, vocabulary_name,
                             options['data'][term.token] = term.title
                         except LookupError:
                             options['data'][value] = value
+                options['data'] = json.dumps(options['data']) # Make sure the data is JSON encoded.
     options['ajax-data-type'] = 'json'
     return options
 

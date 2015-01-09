@@ -13,10 +13,5 @@
     <stylesheet bundle="deprecated" id="++resource++plone.formwidget.querystring.querywidget.css" />
     -->
 
-
-    <stylesheet
-        cacheable="False" compression="none" cookable="True" enabled="True"
-        id="++resource++plone.app.widgets.css"
-        />
-
+    <stylesheet enabled="False" id="++resource++plone.app.widgets.css" />
 </object>

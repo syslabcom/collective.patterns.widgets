@@ -18,10 +18,13 @@
     <javascript bundle="deprecated" id="++resource++plone.formwidget.querystring.querywidget.js" />
     -->
 
+    <!-- Disable plone.app.widgets.js (i.e. Mockup) -->
+    <javascript enabled="False" id="++resource++plone.app.widgets.js" />
+
     <javascript
         cacheable="False" compression="none" cookable="False"
         enabled="True" inline="False"
-        id="++resource++plone.app.widgets.js"
+        id="++resource++collective.patterns.widgets.form_tabbing.js"
         insert-after="++resource++plone.app.jquery.js"
         />
 

@@ -7,16 +7,14 @@
 
     <!-- XXX: plone.app.widgets deprecates these stylesheets because they get
          replaced with Mockup widgets. We don't yet have Patternslib widgets for these, so we don't deprecate them.
-
     <stylesheet bundle="deprecated" id="++resource++plone.formwidget.autocomplete/jquery.autocomplete.css" />
     <stylesheet bundle="deprecated" id="++resource++plone.formwidget.contenttree/contenttree.css" />
     <stylesheet bundle="deprecated" id="++resource++plone.formwidget.querystring.querywidget.css" />
     -->
 
-
     <stylesheet
         cacheable="False" compression="none" cookable="True" enabled="True"
-        id="++resource++plone.app.widgets.css"
+        id="++resource++collective.patterns.widgets/widgets.css"
         />
 
 </object>

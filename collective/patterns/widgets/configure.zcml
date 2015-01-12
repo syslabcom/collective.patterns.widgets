@@ -14,6 +14,12 @@
   <include package="plone.app.vocabularies" />
   <include package=".browser" />
 
+    <!-- Publish static files -->
+    <browser:resourceDirectory
+        name="collective.patterns.widgets"
+        directory="static"
+        />
+
   <browser:resource
       name="plone.app.widgets-bootstrap-glyphicons-halflings-regular.eot"
       file="static/widgets-bootstrap-glyphicons-halflings-regular.eot"
@@ -34,52 +40,34 @@
       file="static/widgets-bootstrap-glyphicons-halflings-regular.woff"
       layer=".interfaces.IWidgetsLayer"
       />
-
   <browser:resource
       name="plone.app.widgets-dropzone-spritemap@2x.png"
       file="static/widgets-dropzone-spritemap@2x.png"
       layer=".interfaces.IWidgetsLayer"
       />
-
   <browser:resource
       name="plone.app.widgets-dropzone-spritemap.png"
       file="static/widgets-dropzone-spritemap.png"
       layer=".interfaces.IWidgetsLayer"
       />
-
   <browser:resource
       name="plone.app.widgets-jqtree-jqtree-circle.png"
       file="static/widgets-jqtree-jqtree-circle.png"
       layer=".interfaces.IWidgetsLayer"
       />
-
   <browser:resource
       name="plone.app.widgets-select2-select2.png"
       file="static/widgets-select2-select2.png"
       layer=".interfaces.IWidgetsLayer"
       />
-
   <browser:resource
       name="plone.app.widgets-select2-select2-spinner.gif"
       file="static/widgets-select2-select2-spinner.gif"
       layer=".interfaces.IWidgetsLayer"
       />
-
   <browser:resource
       name="plone.app.widgets-select2-select2x2.png"
       file="static/widgets-select2-select2x2.png"
-      layer=".interfaces.IWidgetsLayer"
-      />
-
-  <browser:resource
-      name="collective.patterns.widgets.form_tabbing.js"
-      file="static/form_tabbing.js"
-      layer=".interfaces.IWidgetsLayer"
-      />
-
-  <browser:resource
-      name="plone.app.widgets.css"
-      file="static/widgets.css"
       layer=".interfaces.IWidgetsLayer"
       />
 

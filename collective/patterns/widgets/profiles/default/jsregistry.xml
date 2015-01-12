@@ -25,7 +25,7 @@
     <javascript
         cacheable="False" compression="none" cookable="False"
         enabled="True" inline="False"
-        id="++resource++collective.patterns.widgets.form_tabbing.js"
+        id="++resource++plone.app.widgets.js"
         insert-after="++resource++plone.app.jquery.js"
         />
 

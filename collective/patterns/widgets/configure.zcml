@@ -63,6 +63,27 @@
           provides="archetypes.schemaextender.interfaces.ISchemaModifier"
           />
     </configure>
+
+    <configure zcml:condition="installed plone.app.dexterity">
+      <adapter factory=".dx_bbb.SubjectsFieldWidget" />
+      <adapter factory=".dx_bbb.LanguageFieldWidget" />
+      <adapter factory=".dx_bbb.EffectiveDateFieldWidget" />
+      <adapter factory=".dx_bbb.ExpirationDateFieldWidget" />
+      <adapter factory=".dx_bbb.ContributorsFieldWidget" />
+      <adapter factory=".dx_bbb.CreatorsFieldWidget" />
+
+      <configure zcml:condition="installed plone.app.relationfield">
+        <adapter factory=".dx_bbb.RelatedItemsFieldWidget" />
+      </configure>
+
+      <!-- override p.a.contenttypes specific widgets -->
+      <configure zcml:condition="installed plone.app.contenttypes">
+          <adapter factory=".dx_bbb.QueryStringFieldWidget" />
+          <adapter factory=".dx_bbb.RichTextFieldWidget" />
+      </configure>
+
+    </configure>
+
   </configure>
 
   <!-- plone 5 configuration -->

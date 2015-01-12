@@ -19,7 +19,6 @@ from collective.patterns.widgets.utils import get_relateditems_options
 from collective.patterns.widgets.utils import get_tinymce_options
 from plone.app.widgets.base import SelectWidget as BaseSelectWidget
 from plone.app.widgets.base import InputWidget
-from plone.app.widgets.base import SelectWidget
 from plone.app.widgets.base import TextareaWidget
 from plone.app.widgets.base import dict_merge
 from plone.autoform.interfaces import WIDGETS_KEY
@@ -655,16 +654,11 @@ class AjaxSelectWidget(BaseWidget, z3cform_TextWidget):
         :returns: Arguments which will be passed to _base
         :rtype: dict
         """
-
         args = super(AjaxSelectWidget, self)._base_args()
-
         args['name'] = self.name
         args['value'] = self.value
-
         args.setdefault('pattern_options', {})
-
         field_name = self.field and self.field.__name__ or None
-
         context = self.context
         # We need special handling for AddForms
         if IAddForm.providedBy(getattr(self, 'form')):
@@ -694,7 +688,6 @@ class AjaxSelectWidget(BaseWidget, z3cform_TextWidget):
         # ISequence represents an orderable collection
         if ISequence.providedBy(self.field) or self.orderable:
             args['pattern_options']['orderable'] = True
-
         return args
 
 

@@ -8,10 +8,6 @@ from lxml import etree
 from plone.app.textfield.value import RichTextValue
 from plone.app.textfield.widget import IRichTextWidget as patextfield_IRichTextWidget  # noqa
 from plone.app.textfield.widget import RichTextWidget as patextfield_RichTextWidget  # noqa
-from collective.patterns.widgets.base import InputWidget
-from collective.patterns.widgets.base import SelectWidget as BaseSelectWidget
-from collective.patterns.widgets.base import TextareaWidget
-from collective.patterns.widgets.base import dict_merge
 from collective.patterns.widgets.interfaces import IFieldPermissionChecker
 from collective.patterns.widgets.interfaces import IWidgetsLayer
 from collective.patterns.widgets.utils import NotImplemented
@@ -21,6 +17,11 @@ from collective.patterns.widgets.utils import get_datetime_options
 from collective.patterns.widgets.utils import get_querystring_options
 from collective.patterns.widgets.utils import get_relateditems_options
 from collective.patterns.widgets.utils import get_tinymce_options
+from plone.app.widgets.base import SelectWidget as BaseSelectWidget
+from plone.app.widgets.base import InputWidget
+from plone.app.widgets.base import SelectWidget
+from plone.app.widgets.base import TextareaWidget
+from plone.app.widgets.base import dict_merge
 from plone.autoform.interfaces import WIDGETS_KEY
 from plone.autoform.interfaces import WRITE_PERMISSIONS_KEY
 from plone.autoform.utils import resolveDottedName
@@ -37,7 +38,6 @@ from z3c.form.converter import CollectionSequenceDataConverter
 from z3c.form.converter import SequenceDataConverter
 from z3c.form.interfaces import IAddForm
 from z3c.form.interfaces import IFieldWidget
-from z3c.form.interfaces import IFormLayer
 from z3c.form.interfaces import ISelectWidget
 from z3c.form.interfaces import ITextWidget
 from z3c.form.interfaces import NO_VALUE

@@ -3,6 +3,7 @@
 from AccessControl import getSecurityManager
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import IPloneSiteRoot
+from Products.CMFPlone.utils import safe_unicode
 from Products.Five import BrowserView
 from logging import getLogger
 from plone.app.querystring import queryparser
@@ -89,11 +90,11 @@ class BaseVocabularyView(BrowserView):
             else:
                 results = vocabulary.search(query)
         else:
-            query_str = self.request.get('q', '').decode('utf8')
+            query_str = safe_unicode(self.request.get('q', ''))
             query = {}
             query['SearchableText'] = {'query': query_str}
             results = [term for term in vocabulary
-                       if query_str.lower() in term.title.lower()]
+                       if query_str.lower() in safe_unicode(term.title.lower())]
 
         try:
             total = len(results)
@@ -127,7 +128,8 @@ class BaseVocabularyView(BrowserView):
 
         query_str = query['SearchableText']['query']
         #XXX only do this for mutable vocabularies like Keywords
-        items.append({'id': query_str, 'text': query_str})
+        items.append({'id': safe_unicode(query_str),
+                      'text': safe_unicode(query_str)})
 
         attributes = _parseJSON(self.request.get('attributes', ''))
         if isinstance(attributes, basestring) and attributes:
@@ -156,11 +158,12 @@ class BaseVocabularyView(BrowserView):
                             continue
                     if key == 'path':
                         val = val[len(base_path):]
-                    item[key] = val
+                    item[key] = safe_unicode(val)
                 items.append(item)
         else:
             for item in results:
-                items.append({'id': item.token, 'text': item.title})
+                items.append({'id': safe_unicode(item.token),
+                              'text': safe_unicode(item.title)})
 
         if total == 0:
             total = len(items)

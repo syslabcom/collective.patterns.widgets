@@ -89,7 +89,7 @@ class BaseVocabularyView(BrowserView):
             else:
                 results = vocabulary.search(query)
         else:
-            query_str = self.request.get('q', '')
+            query_str = self.request.get('q', '').decode('utf8')
             query = {}
             query['SearchableText'] = {'query': query_str}
             results = [term for term in vocabulary

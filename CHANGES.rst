@@ -1,10 +1,12 @@
 Changelog
 =========
 
-1.8.2 (unreleased)
+1.8.2 (2015-08-25)
 ------------------
 
-- Nothing changed yet.
+- min-width for autosuggest to prevent it from shrinking too much [reinhardt]
+- unicode fixes [reinhardt]
+- whitespace and import cleanup [jcbrand]
 
 
 1.8.1 (2015-01-12)

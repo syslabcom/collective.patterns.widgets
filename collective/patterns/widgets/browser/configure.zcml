@@ -7,7 +7,7 @@
     i18n_domain="plone.app.widgets">
 
   <browser:page
-    name="getVocabulary"
+    name="getPatternsVocabulary"
     for="*"
     class=".vocabulary.VocabularyView"
     permission="zope2.View"

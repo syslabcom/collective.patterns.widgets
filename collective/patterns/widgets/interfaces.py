@@ -1,10 +1,12 @@
+from zope.filerepresentation.interfaces import IFileFactory
 from zope.interface import Interface
+
+
 try:
     from plone.app.widgets.interfaces import IWidgetsLayer
     IFormLayer = IWidgetsLayer
 except ImportError:
     from plone.app.z3cform.interfaces import IPloneFormLayer as IFormLayer
-from zope.filerepresentation.interfaces import IFileFactory
 
 
 class IWidgetsLayer(IFormLayer):
@@ -17,7 +19,7 @@ class IWidgetsView(Interface):
     """A view that gives access to various widget related functions.
     """
 
-    def getVocabulary():
+    def getPatternsVocabulary():
         """Returns vocabulary
         """
 

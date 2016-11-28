@@ -1,27 +1,26 @@
 # -*- coding: utf-8 -*-
-
 from AccessControl import ClassSecurityInfo
-from DateTime import DateTime
-from Products.Archetypes.interfaces import IBaseObject
-from Products.Archetypes.Registry import registerWidget
-from Products.Archetypes.Widget import TypesWidget
-from Products.CMFCore.utils import getToolByName
-from datetime import datetime
 from collective.patterns.widgets.interfaces import IFieldPermissionChecker
-from collective.patterns.widgets.utils import NotImplemented
 from collective.patterns.widgets.utils import get_ajaxselect_options
 from collective.patterns.widgets.utils import get_date_options
 from collective.patterns.widgets.utils import get_datetime_options
 from collective.patterns.widgets.utils import get_querystring_options
 from collective.patterns.widgets.utils import get_relateditems_options
 from collective.patterns.widgets.utils import get_tinymce_options
+from collective.patterns.widgets.utils import NotImplemented
+from DateTime import DateTime
+from datetime import datetime
+from plone.app.widgets.base import dict_merge
 from plone.app.widgets.base import InputWidget
 from plone.app.widgets.base import SelectWidget
 from plone.app.widgets.base import TextareaWidget
-from plone.app.widgets.base import dict_merge
 from plone.uuid.interfaces import IUUID
-from zope.interface import implements
+from Products.Archetypes.interfaces import IBaseObject
+from Products.Archetypes.Registry import registerWidget
+from Products.Archetypes.Widget import TypesWidget
+from Products.CMFCore.utils import getToolByName
 from zope.component import adapts
+from zope.interface import implements
 
 import json
 
@@ -340,7 +339,7 @@ class AjaxSelectWidget(BaseWidget):
         'pattern_options': {},
         'separator': ';',
         'vocabulary': None,
-        'vocabulary_view': '@@getVocabulary',
+        'vocabulary_view': '@@getPatternsVocabulary',
         'orderable': False,
     })
 
@@ -448,7 +447,7 @@ class RelatedItemsWidget(BaseWidget):
         'pattern_options': {},
         'separator': ';',
         'vocabulary': 'plone.app.vocabularies.Catalog',
-        'vocabulary_view': '@@getVocabulary',
+        'vocabulary_view': '@@getPatternsVocabulary',
         'allow_sorting': True,
     })
 

@@ -1,11 +1,12 @@
 Changelog
 =========
 
-1.8.3 (unreleased)
+2.0.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Plone 5 compatibility: rename `getVocabulary` to `getPatternsVocabulary`
+  to avoid interferences with `plone.app.content`'s `getVocabulary` view.
+  [ale-rt]
 
 1.8.2 (2015-08-25)
 ------------------

@@ -1,34 +1,35 @@
 # -*- coding: utf-8 -*-
 from AccessControl import getSecurityManager
-from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone.utils import safe_callable
-from datetime import date
-from datetime import datetime
-from lxml import etree
-from plone.app.textfield.value import RichTextValue
-from plone.app.textfield.widget import IRichTextWidget as patextfield_IRichTextWidget  # noqa
-from plone.app.textfield.widget import RichTextWidget as patextfield_RichTextWidget  # noqa
 from collective.patterns.widgets.interfaces import IFieldPermissionChecker
 from collective.patterns.widgets.interfaces import IWidgetsLayer
-from collective.patterns.widgets.utils import NotImplemented
 from collective.patterns.widgets.utils import get_ajaxselect_options
 from collective.patterns.widgets.utils import get_date_options
 from collective.patterns.widgets.utils import get_datetime_options
 from collective.patterns.widgets.utils import get_querystring_options
 from collective.patterns.widgets.utils import get_relateditems_options
 from collective.patterns.widgets.utils import get_tinymce_options
+from collective.patterns.widgets.utils import NotImplemented
+from datetime import date
+from datetime import datetime
+from lxml import etree
+from plone.app.textfield.value import RichTextValue
+from plone.app.textfield.widget import IRichTextWidget as patextfield_IRichTextWidget  # noqa
+from plone.app.textfield.widget import RichTextWidget as patextfield_RichTextWidget  # noqa
 from plone.app.widgets.base import SelectWidget as BaseSelectWidget
+from plone.app.widgets.base import dict_merge
 from plone.app.widgets.base import InputWidget
 from plone.app.widgets.base import TextareaWidget
-from plone.app.widgets.base import dict_merge
 from plone.autoform.interfaces import WIDGETS_KEY
 from plone.autoform.interfaces import WRITE_PERMISSIONS_KEY
 from plone.autoform.utils import resolveDottedName
 from plone.dexterity.interfaces import IDexterityContent
-from plone.dexterity.utils import iterSchemata, getAdditionalSchemata
+from plone.dexterity.utils import getAdditionalSchemata
+from plone.dexterity.utils import iterSchemata
 from plone.registry.interfaces import IRegistry
 from plone.supermodel.utils import mergedTaggedValueDict
 from plone.uuid.interfaces import IUUID
+from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import safe_callable
 from z3c.form.browser.select import SelectWidget as z3cform_SelectWidget
 from z3c.form.browser.text import TextWidget as z3cform_TextWidget
 from z3c.form.browser.widget import HTMLInputWidget
@@ -50,10 +51,10 @@ from zope.component import queryMultiAdapter
 from zope.component import queryUtility
 from zope.component.hooks import getSite
 from zope.i18n import translate
-from zope.interface import Interface
 from zope.interface import implementer
 from zope.interface import implements
 from zope.interface import implementsOnly
+from zope.interface import Interface
 from zope.publisher.browser import TestRequest
 from zope.schema.interfaces import IChoice
 from zope.schema.interfaces import ICollection
@@ -64,8 +65,9 @@ from zope.schema.interfaces import IList
 from zope.schema.interfaces import ISequence
 from zope.security.interfaces import IPermission
 
-import pytz
 import json
+import pytz
+
 
 try:
     from plone.app.contenttypes.behaviors.collection import ICollection as IDXCollection  # noqa
@@ -639,7 +641,7 @@ class AjaxSelectWidget(BaseWidget, z3cform_TextWidget):
 
     separator = ','
     vocabulary = None
-    vocabulary_view = '@@getVocabulary'
+    vocabulary_view = '@@getPatternsVocabulary'
     orderable = False
 
     def _base_args(self):
@@ -703,7 +705,7 @@ class RelatedItemsWidget(BaseWidget, z3cform_TextWidget):
 
     separator = ';'
     vocabulary = None
-    vocabulary_view = '@@getVocabulary'
+    vocabulary_view = '@@getPatternsVocabulary'
     orderable = False
 
     def _base_args(self):

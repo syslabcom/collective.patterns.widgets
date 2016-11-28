@@ -1,22 +1,24 @@
 # -*- coding: utf-8 -*-
-
-from Acquisition import aq_inner, aq_parent
-from Products.CMFCore.interfaces import ISiteRoot
-from Products.CMFCore.utils import getToolByName
+from Acquisition import aq_inner
+from Acquisition import aq_parent
 from datetime import datetime
 from plone.app.layout.navigation.root import getNavigationRootObject
+from plone.uuid.interfaces import IUUID
+from Products.CMFCore.interfaces import ISiteRoot
+from Products.CMFCore.interfaces._content import IFolderish
+from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.interfaces import IPloneSiteRoot
+from z3c.form.interfaces import IAddForm
+from zope.component import getMultiAdapter
 from zope.component import providedBy
 from zope.component import queryUtility
 from zope.component.hooks import getSite
 from zope.i18n import translate
 from zope.i18nmessageid import MessageFactory
 from zope.schema.interfaces import IVocabularyFactory
-from z3c.form.interfaces import IAddForm
-from Products.CMFCore.interfaces._content import IFolderish
-from plone.uuid.interfaces import IUUID
-from Products.CMFPlone.interfaces import IPloneSiteRoot
-from zope.component import getMultiAdapter
+
 import json
+
 
 _ = MessageFactory('plone.app.widgets')
 _plone = MessageFactory('plone')
@@ -117,7 +119,10 @@ def get_ajaxselect_options(context, value, separator, vocabulary_name,
                             options['data'][term.token] = term.title
                         except LookupError:
                             options['data'][value] = value
-                options['data'] = json.dumps(options['data']) # Make sure the data is JSON encoded.
+
+                # Make sure the data is JSON encoded.
+                options['data'] = json.dumps(options['data'])
+
     options['ajax-data-type'] = 'json'
     return options
 
@@ -184,11 +189,13 @@ def get_tinymce_options(context, field, request):
         del config['plugins']
         del config['theme']
 
-        config['content_css'] = '++resource++plone.app.widgets-tinymce-content.css'
+        config['content_css'] = (
+            '++resource++plone.app.widgets-tinymce-content.css'
+        )
         args['pattern_options'] = {
             'relatedItems': {
                 'ajax-url': config['portal_url'] +
-                '/@@getVocabulary?name=plone.app.vocabularies.Catalog'
+                '/@@getPatternsVocabulary?name=plone.app.vocabularies.Catalog'
             },
             'upload': {
                 'initialFolder': initial,

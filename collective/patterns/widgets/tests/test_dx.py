@@ -1,22 +1,23 @@
 # -*- coding: utf-8 -*-
-from datetime import date
-from datetime import datetime
-from mock import Mock
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import TEST_USER_NAME
-from plone.app.testing import login
-from plone.app.testing import setRoles
 from collective.patterns.widgets.browser.vocabulary import VocabularyView
 from collective.patterns.widgets.interfaces import IWidgetsLayer
 from collective.patterns.widgets.testing import ExampleVocabulary
-from collective.patterns.widgets.testing import PLONEAPPWIDGETS_DX_INTEGRATION_TESTING
+from collective.patterns.widgets.testing import PLONEAPPWIDGETS_DX_INTEGRATION_TESTING  # noqa
 from collective.patterns.widgets.testing import TestRequest
+from datetime import date
+from datetime import datetime
+from mock import Mock
+from plone.app.testing import login
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.app.testing import TEST_USER_NAME
 from plone.autoform.interfaces import WIDGETS_KEY
 from plone.autoform.interfaces import WRITE_PERMISSIONS_KEY
 from plone.dexterity.fti import DexterityFTI
 from plone.registry.interfaces import IRegistry
 from plone.testing.zca import UNIT_TESTING
-from z3c.form.interfaces import IFieldWidget, IFormLayer
+from z3c.form.interfaces import IFieldWidget
+from z3c.form.interfaces import IFormLayer
 from z3c.form.util import getSpecification
 from z3c.form.widget import FieldWidget
 from zope import schema
@@ -25,8 +26,8 @@ from zope.component import provideAdapter
 from zope.component import provideUtility
 from zope.component.globalregistry import base
 from zope.globalrequest import setRequest
-from zope.interface import Interface
 from zope.interface import alsoProvides
+from zope.interface import Interface
 from zope.schema import Choice
 from zope.schema import Date
 from zope.schema import Datetime
@@ -35,9 +36,10 @@ from zope.schema import Set
 from zope.schema import TextLine
 from zope.schema import Tuple
 
-import mock
 import json
+import mock
 import pytz
+
 
 try:
     import unittest2 as unittest
@@ -694,7 +696,7 @@ class AjaxSelectWidgetTests(unittest.TestCase):
                 'value': u'',
                 'pattern': 'select2',
                 'pattern_options': {
-                    'vocabularyUrl': '/@@getVocabulary?name=example',
+                    'vocabularyUrl': '/@@getPatternsVocabulary?name=example',
                     'separator': ';'
                 },
             }
@@ -708,7 +710,7 @@ class AjaxSelectWidgetTests(unittest.TestCase):
                 'value': 'three;two',
                 'pattern': 'select2',
                 'pattern_options': {
-                    'vocabularyUrl': '/@@getVocabulary?name=example',
+                    'vocabularyUrl': '/@@getPatternsVocabulary?name=example',
                     'initialValues': {'three': u'Three', 'two': u'Two'},
                     'separator': ';'
                 },
@@ -807,8 +809,11 @@ class AjaxSelectWidgetTests(unittest.TestCase):
                 'pattern': 'select2',
                 'pattern_options': {
                     'separator': ';',
-                    'vocabularyUrl':
-                    'http://addform_url/@@getVocabulary?name=vocabulary1'}
+                    'vocabularyUrl': (
+                        'http://addform_url/'
+                        '@@getPatternsVocabulary?name=vocabulary1'
+                    )
+                }
 
             },
             widget._base_args(),
@@ -953,7 +958,7 @@ class RelatedItemsWidgetTests(unittest.TestCase):
                     'searchAllText': u'Entire site',
                     'searchText': u'Search',
                     'separator': ';',
-                    'vocabularyUrl': '/@@getVocabulary?name='
+                    'vocabularyUrl': '/@@getPatternsVocabulary?name='
                                      'plone.app.vocabularies.Catalog',
                 },
             },
@@ -1004,7 +1009,7 @@ class RelatedItemsWidgetTests(unittest.TestCase):
         self.assertFalse('maximumSelectionSize' in patterns_options)
         self.assertEqual(
             patterns_options['vocabularyUrl'],
-            '/@@getVocabulary?name=foobar&field=selectfield',
+            '/@@getPatternsVocabulary?name=foobar&field=selectfield',
             )
 
     def test_converter_RelationChoice(self):
@@ -1016,7 +1021,10 @@ class RelatedItemsWidgetTests(unittest.TestCase):
         converter = RelationChoiceRelatedItemsWidgetConverter(
             TextLine(), widget)
 
-        with mock.patch('collective.patterns.widgets.dx.IUUID', return_value='id'):
+        with mock.patch(
+            'collective.patterns.widgets.dx.IUUID',
+            return_value='id'
+        ):
             self.assertEqual(converter.toWidgetValue('obj'), 'id')
         self.assertEqual(converter.toWidgetValue(None), None)
 
@@ -1039,7 +1047,9 @@ class RelatedItemsWidgetTests(unittest.TestCase):
 
         self.assertEqual(converter.toWidgetValue(None), None)
         with mock.patch(
-                'collective.patterns.widgets.dx.IUUID', side_effect=['id1', 'id2']):
+            'collective.patterns.widgets.dx.IUUID',
+            side_effect=['id1', 'id2']
+        ):
             self.assertEqual(
                 converter.toWidgetValue(['obj1', 'obj2']), 'id1;id2')
 
@@ -1094,9 +1104,11 @@ def _custom_field_widget(field, request):
 
 
 def _enable_custom_widget(field):
-    provideAdapter(_custom_field_widget, adapts=
-                   (getSpecification(field), IWidgetsLayer),
-                   provides=IFieldWidget)
+    provideAdapter(
+        _custom_field_widget,
+        adapts=(getSpecification(field), IWidgetsLayer),
+        provides=IFieldWidget
+    )
 
 
 def _disable_custom_widget(field):

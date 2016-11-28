@@ -1,35 +1,33 @@
 # -*- coding: utf-8 -*-
+from collective.patterns.widgets.browser.vocabulary import VocabularyView
+from collective.patterns.widgets.testing import PLONEAPPWIDGETS_INTEGRATION_TESTING  # noqa
+from collective.patterns.widgets.testing import TestRequest
 from DateTime import DateTime
+from datetime import datetime
+from mock import Mock
+from plone.app.testing import login
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.app.testing import TEST_USER_NAME
+from plone.testing.zca import ZCML_DIRECTIVES
 from Products.Archetypes.atapi import BaseContent
 from Products.Archetypes.atapi import ReferenceField
 from Products.Archetypes.atapi import Schema
 from Products.Archetypes.atapi import StringField
-from Products.Archetypes.mimetype_utils import getAllowedContentTypes
-from Products.Archetypes.mimetype_utils import getDefaultContentType
 from Products.CMFCore.utils import getToolByName
-from datetime import datetime
-from mock import Mock
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import TEST_USER_NAME
-from plone.app.testing import login
-from plone.app.testing import setRoles
-from collective.patterns.widgets.browser.vocabulary import VocabularyView
-from collective.patterns.widgets.testing import PLONEAPPWIDGETS_INTEGRATION_TESTING
-from collective.patterns.widgets.testing import TestRequest
-from plone.testing.zca import ZCML_DIRECTIVES
 from zope.configuration import xmlconfig
 from zope.globalrequest import setRequest
 
 import json
 import mock
+import plone.uuid
+
 
 try:
     import unittest2 as unittest
 except ImportError:  # pragma: nocover
     import unittest  # pragma: nocover
     assert unittest  # pragma: nocover
-
-import plone.uuid
 
 
 class BaseWidgetTests(unittest.TestCase):
@@ -295,7 +293,7 @@ class SelectWidgetTests(unittest.TestCase):
                                               self.field, form)[0])
 
 # TODO
-#class AjaxSelectWidgetTests(unittest.TestCase):
+# class AjaxSelectWidgetTests(unittest.TestCase):
 
 
 class RelatedItemsWidgetTests(unittest.TestCase):
@@ -348,7 +346,7 @@ class RelatedItemsWidgetTests(unittest.TestCase):
                     'separator': ';',
                     'orderable': True,
                     'maximumSelectionSize': -1,
-                    'vocabularyUrl': '/@@getVocabulary?name='
+                    'vocabularyUrl': '/@@getPatternsVocabulary?name='
                                      'plone.app.vocabularies.Catalog'
                                      '&field=fieldname',
                 },
@@ -391,7 +389,7 @@ class RelatedItemsWidgetTests(unittest.TestCase):
                     'searchAllText': u'Entire site',
                     'searchText': u'Search',
                     'maximumSelectionSize': 1,
-                    'vocabularyUrl': '/@@getVocabulary?name='
+                    'vocabularyUrl': '/@@getPatternsVocabulary?name='
                                      'plone.app.vocabularies.Catalog'
                                      '&field=fieldname',
                 },
@@ -423,7 +421,7 @@ class RelatedItemsWidgetTests(unittest.TestCase):
                     'searchAllText': u'Entire site',
                     'searchText': u'Search',
                     'maximumSelectionSize': 1,
-                    'vocabularyUrl': '/@@getVocabulary?name='
+                    'vocabularyUrl': '/@@getPatternsVocabulary?name='
                                      'plone.app.vocabularies.Catalog'
                                      '&field=fieldname',
                 },
@@ -472,7 +470,7 @@ class RelatedItemsWidgetTests(unittest.TestCase):
                     'searchAllText': u'Entire site',
                     'searchText': u'Search',
                     'maximumSelectionSize': 1,
-                    'vocabularyUrl': '/@@getVocabulary?name='
+                    'vocabularyUrl': '/@@getPatternsVocabulary?name='
                                      'plone.app.vocabularies.Catalog'
                                      '&field=fieldname1',
                 },
@@ -502,7 +500,7 @@ class RelatedItemsWidgetTests(unittest.TestCase):
                     'searchAllText': u'Entire site',
                     'searchText': u'Search',
                     'maximumSelectionSize': -1,
-                    'vocabularyUrl': '/@@getVocabulary?name='
+                    'vocabularyUrl': '/@@getPatternsVocabulary?name='
                                      'plone.app.vocabularies.Catalog'
                                      '&field=fieldname2',
                 },

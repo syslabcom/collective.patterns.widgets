@@ -4,6 +4,10 @@ Changelog
 2.0.0 (unreleased)
 ------------------
 
+- Make the qsOption view work for every context
+  (allows to publish a site subfolder)
+  [ale-rt]
+
 - Plone 5 compatibility: rename `getVocabulary` to `getPatternsVocabulary`
   to avoid interferences with `plone.app.content`'s `getVocabulary` view.
   [ale-rt]

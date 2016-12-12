@@ -32,7 +32,7 @@
 
   <browser:page
     name="qsOptions"
-    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    for="*"
     class=".query.QueryStringIndexOptions"
     permission="zope2.View"
     layer="collective.patterns.widgets.interfaces.IWidgetsLayer"

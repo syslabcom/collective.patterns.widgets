@@ -776,9 +776,11 @@ class AjaxSelectWidgetTests(unittest.TestCase):
                 'pattern_options': {
                     'separator': ';',
                     'maximumSelectionSize': 1,
-                    'vocabularyUrl':
-                    'http://127.0.0.1/++widget++choicefield/@@getSource',
-                    },
+                    'vocabularyUrl': (
+                        'http://127.0.0.1/'
+                        '++widget++choicefield/@@getPatternsSource'
+                    ),
+                },
             },
             widget._base_args(),
         )

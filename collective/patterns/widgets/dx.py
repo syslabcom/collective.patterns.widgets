@@ -684,7 +684,10 @@ class AjaxSelectWidget(BaseWidget, z3cform_TextWidget):
 
         if field and getattr(field, 'vocabulary', None):
             form_url = self.request.getURL()
-            source_url = "%s/++widget++%s/@@getSource" % (form_url, self.name)
+            source_url = "%s/++widget++%s/@@getPatternsSource" % (
+                form_url,
+                self.name,
+            )
             args['pattern_options']['ajax-url'] = source_url
 
         # ISequence represents an orderable collection
@@ -750,7 +753,7 @@ class RelatedItemsWidget(BaseWidget, z3cform_TextWidget):
         if not self.vocabulary:  # widget vocab takes precedence over field
             if field and getattr(field, 'vocabulary', None):
                 form_url = self.request.getURL()
-                source_url = "%s/++widget++%s/@@getSource" % (
+                source_url = "%s/++widget++%s/@@getPatternsSource" % (
                     form_url, self.name)
                 args['pattern_options']['ajax-url'] = source_url
 

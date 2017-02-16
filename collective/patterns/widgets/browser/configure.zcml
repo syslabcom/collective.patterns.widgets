@@ -15,7 +15,7 @@
     />
 
   <browser:page
-    name="getSource"
+    name="getPatternsSource"
     for="z3c.form.interfaces.IWidget"
     class=".vocabulary.SourceView"
     permission="zope.Public"

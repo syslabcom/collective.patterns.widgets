@@ -1,8 +1,8 @@
 Changelog
 =========
 
-2.0.0 (unreleased)
-------------------
+2.0.0rc1 (2017-02-27)
+---------------------
 
 - Make the qsOption view work for every context
   (allows to publish a site subfolder)
